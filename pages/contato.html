@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato & Pedidos - Confeitaria Sempre Doce</title>
+
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/contato.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="div-logo">
+            <img class="logotipo" src="../img/logo.png" alt="Logotipo da Confeitaria">
+        </div>
+
+        <div class="div-menu">
+            <h1>Confeitaria Sempre Doce</h1>
+            <br />
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Início</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="cardapio.html">Cardápio</a></li>
+                    <li><a href="contato.html">Contato & Pedidos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container-contato">
+        <!-- LADO ESQUERDO: INFORMAÇÕES -->
+        <section class="info-contato">
+            <h2>Faça seu Pedido Online</h2>
+            <p>Monte o seu pedido abaixo e receba nossas delícias no conforto da sua casa!</p>
+
+            <div class="item-contato">
+                <h4> Atendimento & Encomendas</h4>
+                <p>WhatsApp: (11) 99999-9999</p>
+                <p>E-mail: encomendas@sempredoce.com</p>
+            </div>
+
+            <div class="item-contato">
+                <h4> Horários de Entrega</h4>
+                <p>Segunda a Sábado: 08h às 19h</p>
+                <p>Domingos: 08h às 13h</p>
+            </div>
+
+            <div class="item-contato">
+                <h4> Taxa de Entrega</h4>
+                <p>Retirada na Loja: Grátis</p>
+                <p>Entrega em Domicílio: R$ 8,00</p>
+            </div>
+        </section>
+
+        <!-- LADO DIREITO: FORMULÁRIO COMPLETO -->
+        <section class="form-contato">
+            <h3>Formulário de Encomenda</h3>
+            <form id="formPedido" onsubmit="finalizarPedido(event)">
+
+                <!-- 1. DADOS DO CLIENTE -->
+                <div class="secao-form">
+                    <h4>1. Dados do Cliente</h4>
+                    <div class="grupo-form">
+                        <label for="nome">Nome Completo *</label>
+                        <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="telefone">Telefone / WhatsApp *</label>
+                        <input type="tel" id="telefone" placeholder="(11) 99999-9999" required>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="tipoEntrega">Opção de Recebimento *</label>
+                        <select id="tipoEntrega" onchange="atualizarTotal()" required>
+                            <option value="entrega">Entrega em Domicílio (+ R$ 8,00)</option>
+                            <option value="retirada">Retirar na Confeitaria (Grátis)</option>
+                        </select>
+                    </div>
+
+                    <div class="grupo-form" id="boxEndereco">
+                        <label for="endereco">Endereço Completo de Entrega *</label>
+                        <input type="text" id="endereco" placeholder="Rua, Número, Bairro, Ponto de Referência" required>
+                    </div>
+                </div>
+
+                <hr class="divisor" />
+
+                <!-- 2. ITENS DO PEDIDO -->
+                <div class="secao-form">
+                    <h4>2. Selecione os Itens</h4>
+                    
+                    <div class="lista-produtos">
+                        <div class="item-produto">
+                            <div class="detalhes-prod">
+                                <strong>Bolo de Chocolate</strong>
+                                <span>R$ 65,00 / un</span>
+                            </div>
+                            <div class="controles-qtd">
+                                <button type="button" onclick="alterarQtd('choc', -1)">-</button>
+                                <span id="qtd-choc">0</span>
+                                <button type="button" onclick="alterarQtd('choc', 1)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="item-produto">
+                            <div class="detalhes-prod">
+                                <strong>Bolo de Morango</strong>
+                                <span>R$ 70,00 / un</span>
+                            </div>
+                            <div class="controles-qtd">
+                                <button type="button" onclick="alterarQtd('morang', -1)">-</button>
+                                <span id="qtd-morang">0</span>
+                                <button type="button" onclick="alterarQtd('morang', 1)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="item-produto">
+                            <div class="detalhes-prod">
+                                <strong>Bolo de Cenoura</strong>
+                                <span>R$ 55,00 / un</span>
+                            </div>
+                            <div class="controles-qtd">
+                                <button type="button" onclick="alterarQtd('cenou', -1)">-</button>
+                                <span id="qtd-cenou">0</span>
+                                <button type="button" onclick="alterarQtd('cenou', 1)">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grupo-form" style="margin-top: 15px;">
+                        <label for="observacoes">Observações / Personalizações</label>
+                        <textarea id="observacoes" rows="2" placeholder="Ex: Velas, topo de bolo, remover morango..."></textarea>
+                    </div>
+                </div>
+
+                <hr class="divisor" />
+
+                <!-- 3. FORMA DE PAGAMENTO -->
+                <div class="secao-form">
+                    <h4>3. Pagamento</h4>
+                    <div class="grupo-form">
+                        <label for="pagamento">Forma de Pagamento *</label>
+                        <select id="pagamento" required>
+                            <option value="">Selecione uma opção...</option>
+                            <option value="PIX">PIX (Chave ou QR Code)</option>
+                            <option value="Cartão de Crédito">Cartão de Crédito</option>
+                            <option value="Cartão de Débito">Cartão de Débito</option>
+                            <option value="Dinheiro">Dinheiro (na entrega/retirada)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- RESUMO DO TOTAL -->
+                <div class="resumo-total">
+                    <div>
+                        <span>Subtotal Itens: <strong id="subtotal">R$ 0,00</strong></span><br>
+                        <small id="txtTaxa">Taxa de Entrega: R$ 8,00</small>
+                    </div>
+                    <div class="valor-final" id="totalGeral">R$ 8,00</div>
+                </div>
+
+                <button type="submit" class="btn-enviar">Confirmar Pedido</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- MODAL DE CONFIRMAÇÃO DO PEDIDO -->
+    <div id="fade" class="hide"></div>
+    <div id="modal" class="hide">
+        <div class="centralizado">
+            <h2 style="color: #D48884; margin-bottom: 10px;">Pedido Confirmado!</h2>
+            <p id="msgConfirmacao"></p>
+
+            <div id="boxPix" class="hide" style="margin-top: 15px;">
+                <p><strong>Efetue o pagamento via PIX:</strong></p>
+                <img src="../img/qrcode.png" alt="QRCode PIX" style="width: 160px; margin: 10px auto; display: block;">
+            </div>
+        </div>
+        <div class="fechar">
+            <button type="button" class="btn-enviar" onclick="fecharModal()">OK / Fechar</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Confeitaria Sempre Doce. Todos os direitos reservados.
+    </footer>
+
+    <script>
+        const preços = { choc: 65, morang: 70, cenou: 55 };
+        const qtds = { choc: 0, morang: 0, cenou: 0 };
+
+        function alterarQtd(item, valor) {
+            if (qtds[item] + valor >= 0) {
+                qtds[item] += valor;
+                document.getElementById('qtd-' + item).innerText = qtds[item];
+                atualizarTotal();
+            }
+        }
+
+        function atualizarTotal() {
+            let subtotal = (qtds.choc * preços.choc) + (qtds.morang * preços.morang) + (qtds.cenou * preços.cenou);
+            let tipoEntrega = document.getElementById('tipoEntrega').value;
+            let taxa = tipoEntrega === 'entrega' ? 8 : 0;
+
+            document.getElementById('endereco').required = (tipoEntrega === 'entrega');
+            document.getElementById('boxEndereco').style.display = (tipoEntrega === 'entrega') ? 'block' : 'none';
+
+            document.getElementById('subtotal').innerText = 'R$ ' + subtotal.toFixed(2).replace('.', ',');
+            document.getElementById('txtTaxa').innerText = tipoEntrega === 'entrega' ? 'Taxa de Entrega: R$ 8,00' : 'Retirada no Balcão: Grátis';
+            document.getElementById('totalGeral').innerText = 'R$ ' + (subtotal + taxa).toFixed(2).replace('.', ',');
+        }
+
+        function finalizarPedido(e) {
+            e.preventDefault();
+            let totalItens = qtds.choc + qtds.morang + qtds.cenou;
+
+            if (totalItens === 0) {
+                alert('Por favor, adicione pelo menos 1 item ao seu pedido!');
+                return;
+            }
+
+            let nome = document.getElementById('nome').value;
+            let pag = document.getElementById('pagamento').value;
+            let total = document.getElementById('totalGeral').innerText;
+
+            document.getElementById('msgConfirmacao').innerText = `Obrigado, ${nome}! Seu pedido no valor de ${total} foi registrado com sucesso. Forma de pagamento: ${pag}.`;
+            
+            if (pag === 'PIX') {
+                document.getElementById('boxPix').classList.remove('hide');
+            } else {
+                document.getElementById('boxPix').classList.add('hide');
+            }
+
+            document.getElementById('fade').classList.remove('hide');
+            document.getElementById('fade').classList.add('fade');
+            document.getElementById('modal').classList.remove('hide');
+            document.getElementById('modal').classList.add('modal');
+        }
+
+        function fecharModal() {
+            document.getElementById('fade').classList.add('hide');
+            document.getElementById('fade').classList.remove('fade');
+            document.getElementById('modal').classList.add('hide');
+            document.getElementById('modal').classList.remove('modal');
+        }
+    </script>
+</body>
+</html>

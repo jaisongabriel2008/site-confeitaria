@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: "Manrope", sans-serif;
 }
 
@@ -64,6 +65,7 @@ a:hover {
 
 h2 {
     font-size: 35px;
+    margin-top: 30px;
 }
 
 p {
@@ -72,116 +74,53 @@ p {
 }
 
 .menu-cardapio-itens {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
+    width: min(1100px, calc(100% - 32px));
+    margin: 24px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
 }
 
 .menu-cardapio-item {
-    border: 2px solid rgb(223, 223, 227);
-    border-radius: 5px;
-    width: 20%;
-    box-shadow: 2px 2px 8px #000000;
-}
-*{
-    margin: 0;
-    padding: 0;
-     font-family: "Unna", serif;
-}
-
-header{
-   
-    height: 200px;
-    display: flex;
-    background-color: #FEF9F4;
-}
-
-.div-logo{
-   
-    width: 15%;
-    height: 194px;
-}
-
-.div-menu{
-   
-    width: 85%;
-    height: 194px;
+    border: 2px solid #D48884;
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+    padding: 20px;
+    background-color: #fffaf5;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.logotipo{
-    width: 200px;
+    min-width: 0;
 }
 
-ul{
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    list-style-type: none;
+h3 {
+    font-size: 25px;
+    color: #D48884;
+    font-weight: bold;
 }
 
-h1{
-    color: #541E17;
-    font-size: 45px;
-}
-
-a {
-    text-decoration: none;
-    color: #541E17;
-    font-size: 20px;
-}
-a:hover{
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-img{
+.menu-cardapio-item .img-cardapio {
     width: 100%;
-    height: 200px;
+    height: 180px;
+    margin: 0 0 12px;
+    border-radius: 10px;
     object-fit: cover;
 }
 
-.sobre{
-    text-align: center;
-    margin-top: 10px;
-}
-h2{
-    font-size: 35px;
-    margin-top: 30px;
-}
-p{
-    font-size: 25px;
-    margin-top: 10px;
+.menu-cardapio-item p {
+    font-size: 20px;
 }
 
-.Menu-Cardapio-itens{
-    display: flex;
-    gap: 15px;
-    justify-content: space-around;
-    margin-top: 20px;  
-    text-align: center;
-}
-.Menu-cardapio-item{
-    border: 2px solid #541E17 ;
-    border-radius: 5px;
-    width: 25%;
-    box-shadow: 9px 14px 10px rgba(0, 0, 0, 0.5);
-    padding: 10px;
-}
-h3{
-    font-size: 25px ;
-    color: #541E17;    
+@media (max-width: 760px) {
+    .menu-cardapio-itens {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+    }
 }
 
-.Menu-cardapio-item{
-    font-size: 18px;
-}
-
-footer{
-    background-color: #541E17;
-    height: 70px;
+footer {
+    background-color: #D48884;
+    height: 50px;
     margin-top: 20px;
     font-size: 20px;
     display: flex;
